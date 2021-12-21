@@ -1,32 +1,6 @@
 // Tiny-Shell.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
-
-#include <iostream>
-#include <cstring>
 #include"Declarations.h"
-using namespace std;
-
-void doDiff(int argc, char* argv[]) {
-    return;
-}
-void doGrep(int argc, char* argv[]) {
-    return;
-}
-void doTee(int argc, char* argv[]) {
-    return;
-}
-void doCat(int argc, char* argv[]) {
-    return;
-}
-void doCp(int argc, char* argv[]) {
-    return;
-}
-void doCd(int argc, char* argv[]) {
-    return;
-}
-void doPwd(int argc, char* argv[]) {
-    return;
-}//临时定义，为了让编译通过
 
 Terminal gTerm;
 
