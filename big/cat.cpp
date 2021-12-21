@@ -78,6 +78,11 @@ int outputLine(char line[], int linenum){
 }
 
 void doCat(int argc, char * argv[]){
+    if (argc == 1){
+        cerr << "cat: No parameters received.\n";
+        return;
+    }
+    
     doLineno = false;
     doBlankNo = false;
     doReplaceBlank = false;
@@ -106,7 +111,7 @@ With no file, or when FILE is -, read standard input.\n\
       --help     display this help and exit\n\
 \n\
 Examples:\n\
-  cat f - g  Output f's contents, then standard input, then g's contents.");
+  cat f - g  Output f's contents, then standard input, then g's contents.\n");
             return;
         }
         else if ((strcmp(argv[i], "-n") == 0) || (strcmp(argv[i], "--number") == 0)){
