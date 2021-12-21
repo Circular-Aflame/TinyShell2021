@@ -9,7 +9,7 @@ string word;
 int length_word;
 int st[100];
 int endd[100];
-int k;
+int k,filefile=0;
 
 struct info{
 	string content;			//存储该行内容 
@@ -300,11 +300,13 @@ void doGrep(int argc , char * argv[]){
 			f[0]='\0';
 			if(argv[start_num+i][0]=='-'){//从strin读取 
 				fout.open("strin.txt");
+				filefile=1;
 				for(int j=0;j<strlen(gTerm.strin);j++){
-					fout<<gTerm.strin[i];
+					fout<<gTerm.strin[j];
 				}
 				strcat(f,"strin.txt");
 				file_name="strin.txt";
+				fout.close();
 			}else{ 
 				file_name=argv[start_num+i];
 				strcpy(f,fullFileDir(argv[start_num+i]));
@@ -346,6 +348,9 @@ void doGrep(int argc , char * argv[]){
 			int2strout(count);
 			strcat(gTerm.strout,"\n");
 		} 
+	}
+	if(filefile){
+		remove("strin.txt");
 	}	
 	return;	
 }
