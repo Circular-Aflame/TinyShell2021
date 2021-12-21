@@ -21,6 +21,11 @@ int splitDir(char * inChar, char *arrChar[]){
 }
 
 void doCd(int argc, char * argv[]){
+    
+    if (argc == 1){
+        cerr << "cd: No parameters received.\n";
+        return;
+    }
     if(strcmp(argv[1], "--help") == 0){
         strcpy(gTerm.strout, "Change the shell working directory.\n");
         return;
