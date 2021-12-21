@@ -13,8 +13,8 @@ int main() {
     cin >> gTerm.user; //以上为输入机器名称、根目录、以及用户名。
     cin.ignore();//如果没有这条语句，第一次循环的cin.getline会被跳过，造成连续输出两次用户名等内容。
 
-    for (int p = 0;; p++) {
-        strcpy(gTerm.wdir,"/");
+    strcpy(gTerm.wdir,"/");
+    while(1) {
         cout << "\033[92;1m" << gTerm.user 
             << "\033[92; 1m@" 
             << "\033[92;1m" << gTerm.mach 
