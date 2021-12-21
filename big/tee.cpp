@@ -2,6 +2,12 @@
 #include "global.h"
 
 void doTee(int argc, char * argv[]){
+    
+    if (argc == 1){
+        cerr << "tee: No parameters received.\n";
+        return;
+    }
+    
     bool doOverwrt = true;
     char * arrFile[MAXARG];
     int filenum = 0;
@@ -15,7 +21,7 @@ void doTee(int argc, char * argv[]){
 Copy standard input to each FILE, and also to standard output.\n\
 \n\
   -a, --append              append to the given FILEs, do not overwrite\n\
-      --help     display this help and exit");
+      --help     display this help and exit\n");
         return;
         }
         else if (strcmp(argv[i], "-a") == 0 || strcmp(argv[i], "--append") == 0) {
