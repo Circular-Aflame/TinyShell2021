@@ -1,7 +1,36 @@
-﻿#include"Declarations.h"
+// Tiny-Shell.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+//
+
+#include <iostream>
+#include <cstring>
+#include"Declarations.h"
+using namespace std;
+
+void doDiff(int argc, char* argv[]) {
+    return;
+}
+void doGrep(int argc, char* argv[]) {
+    return;
+}
+void doTee(int argc, char* argv[]) {
+    return;
+}
+void doCat(int argc, char* argv[]) {
+    return;
+}
+void doCp(int argc, char* argv[]) {
+    return;
+}
+void doCd(int argc, char* argv[]) {
+    return;
+}
+void doPwd(int argc, char* argv[]) {
+    return;
+}//临时定义，为了让编译通过
 
 Terminal gTerm;
 
+char input[9999];//初始输入到这个字符数组里。
 char table[9999];//table数组负备份strin。
 
 int main() {
@@ -13,8 +42,8 @@ int main() {
     cin >> gTerm.user; //以上为输入机器名称、根目录、以及用户名。
     cin.ignore();//如果没有这条语句，第一次循环的cin.getline会被跳过，造成连续输出两次用户名等内容。
 
-    strcpy(gTerm.wdir,"/");
-    while(1) {
+    strcpy(gTerm.wdir, "/");
+    while (true) {
         cout << "\033[92;1m" << gTerm.user 
             << "\033[92; 1m@" 
             << "\033[92;1m" << gTerm.mach 
@@ -24,12 +53,12 @@ int main() {
 
         int argc = 0;//argc为记录字符串数量的变量。
 
-        cin.getline(gTerm.strin, 9999);
-        strcat(gTerm.strin," ");//用户输入指令到strin。程序自动在输入末尾补一个空格。 
+        cin.getline(input, 9999);
+        strcat(input," ");//用户输入指令到input。程序自动在输入末尾补一个空格。 
 
         bool blank = 1;//blank负责辅助判断输入字符串是否为空字符串。
-        for (int i = 0; i < strlen(gTerm.strin); i++) {
-            if (gTerm.strin[i] != 32) {
+        for (int i = 0; i < strlen(input); i++) {
+            if (input[i] != 32) {
                 blank = 0;
             }
         }
@@ -37,9 +66,9 @@ int main() {
             continue;
         }//当输入字符串为空字符串时，直接跳过此次循环。
 
-        for (int i = 0; i < strlen(gTerm.strin); i++) {
-            if (gTerm.strin[i] != 32) {
-                strncpy(gTerm.strin, gTerm.strin + i, strlen(gTerm.strin) );
+        for (int i = 0; i < strlen(input); i++) {
+            if (input[i] != 32) {
+                strncpy(input, input + i, strlen(input) );
                 break;
             }
         }//去掉输入正式指令前的空格
@@ -47,27 +76,27 @@ int main() {
 
 
         int num = 0;//num为记录“|”个数的变量。
-        for (int i = 1; i < strlen(gTerm.strin); i++) {//循环从1开始，防止一开始就出现了复合指令。
-            if (gTerm.strin[i] == 124&& gTerm.strin[i-1]==32) {//仅当“|”前为空格时，将“|”识别为复合指令。
+        for (int i = 1; i < strlen(input); i++) {//循环从1开始，防止一开始就出现了复合指令。
+            if (input[i] == 124&& input[i-1]==32) {//仅当“|”前为空格时，将“|”识别为复合指令。
                 num++;
             }//124为“|”的ASCII码
         }
         if (num == 0) {//没有复合指令时
-            strcpy(table, gTerm.strin);//table用作数据隔离，防止后续操作影响gTerm.strin
-            for (int i = 0; i < strlen(gTerm.strin); i++) {
-                if (gTerm.strin[i] == 32&& gTerm.strin[i+1]!=32) {//"32"为空格的ASCII码,仅当空格后面不为空格时argc++。
+            strcpy(table, input);//table用作数据隔离，防止后续操作影响input
+            for (int i = 0; i < strlen(input); i++) {
+                if (input[i] == 32&& input[i+1]!=32) {//"32"为空格的ASCII码,仅当空格后面不为空格时argc++。
                     argc++;
                 }
             }
 
-            char** argv = new char* [argc + 1];//加1是为了保证在strin中没有空格时argv可以被创建出来。
+            char** argv = new char* [argc + 1];//加1是为了保证在input中没有空格时argv可以被创建出来。
             for (int i = 0; i < argc; i++) {
                 if (i == 0) {
                     argv[i] = strtok(table, " ");
                 }
                 else {
                     argv[i] = strtok(NULL, " ");
-                }//如果strin中出现空格，则将strin分割,并将字符串分别存在argv[x]里面。
+                }//如果input中出现空格，则将input分割,并将字符串分别存在argv[x]里面。
 
             };
 
@@ -95,7 +124,7 @@ int main() {
             for (int i = 0; i < strlen(table); i++) {
                 table[i] = '\0';//清空
             }
-            strcpy(table, gTerm.strin);//table用作数据隔离，防止后续操作影响gTerm.strin
+            strcpy(table, input);//table用作数据隔离，防止后续操作影响gTerm.strin
             char** strin = new char* [num+1];//二维数组strin负责记录以“|”为标志拆分的字符串。
             strcat_s(table, "|");//用户输入指令到strin。程序自动在输入末尾补一个"|",以便让strtok识别最后一段字符串。
             for (int i = 0; i < num+1; i++) {
@@ -104,7 +133,7 @@ int main() {
                 }
                 else {
                     strin[i] = strtok(NULL, "|");
-                }//如果gTerm.strin中出现“|”，则将其分割,并将字符串分别存在strin[x]里面。
+                }//如果input中出现“|”，则将其分割,并将字符串分别存在strin[x]里面。
             }
 
             for (int i1 = 0; i1 < num+1; i1++) {
@@ -179,6 +208,7 @@ int main() {
             delete[]strin;//删除动态二位数组strin。
 
         }
+        memset(gTerm.strin,'\0',9999);
     }
     return 0;
 }
