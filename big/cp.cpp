@@ -39,6 +39,14 @@ bool fileCopy(char *input, char *output){ //复制文件
 }
 
 void doCp(int argc, char * argv[]){
+    if (argc == 1){
+        cerr << "cp: No parameters received.\n";
+        return;
+    }
+    else if (argc == 2){
+        cerr << "cp: Missing destination file after '" << argv[1] << "'\nTry 'cp -- help' for more information.\n";
+    }
+    
     char * arrFile[MAXARG];
     bool doOverwrt = true;
     bool doInteract = false;
@@ -59,7 +67,7 @@ Copy SOURCE to DEST, or multiple SOURCE(s) to DIRECTORY.\n\
   -i, --interactive            prompt before overwrite (overrides a previous -n option)\n\
   -n, --no-clobber             do not overwrite an existing file (overrides a previous -i option)\n\
   -v, --verbose                explain what is being done\n\
-      --help     display this help and exit");
+      --help     display this help and exit\n");
             return;
         }
         
