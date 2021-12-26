@@ -72,14 +72,13 @@ void numoutm(int k)/*输出行数*/
 	{
 		t++;
 	}
-	char*num=new char[t];
+	char num[10]={0};
 	for(int i=0;i<t;i++)
 	{
 		num[t-i-1]=k%10+'0';
 		k/=10;
 	}
 	strcat(out,num);
-	delete[] num;
 }
 void newfilem(FILE*&at,int j)/*打开临时文件*/
 {
