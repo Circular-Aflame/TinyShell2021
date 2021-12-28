@@ -5,7 +5,7 @@ bool*cho=new bool[6]();/*命令记录*/
 char*ii=nullptr;/*-I字符串记录*/
 void help()/*显示帮助*/
 {
-	strcat(out,"输入格式：diff {-b}{-B}{-i}{-q}{-w}{-I[字符串]}[文件1][文件2]\n-b：不检查空格字符的不同\n-B：不检查空白行\n-i：不检查大小写的不同\n-q：仅显示有无差异。无差异时不显示，有差异时显示“File [文件1] and [文件2] differ”\n-w: 忽略全部的空格字符\n-I[字符串]：若两个文件在某几行有所不同，但这几行同时都包含了选项中指定字符串（空格不可忽略），则不显示为这两个文件的差异\n");
+	strcat(out,"Input: diff {-b}{-B}{-i}{-q}{-w}{-I[RE]}[file1][file2]\n-b, --ignore-space-change\n-B, --ignore-blank-lines\n-i, --ignore-case\n-q, --brief, report only when files differ\n-w, --ignore-all-space\n-I, --ignore-matching-lines=RE\n");
 }
 void modify(char*a,char* b);
 void doDiff(int argc, char* argv[])/*diff指令处理*/
